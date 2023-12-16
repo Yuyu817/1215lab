@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scrollable Blocks</title>
+  <link rel="stylesheet" type="text/css" href="1215lab.css">
+
+</head>
+<body>
+
+ <!-- Before the script-->
+  <p id="before-script"> Before the script...</p>
+
+  
+  <script>
+    // 获取 p 元素
+    var paragraph = document.getElementById('before-script');
+    // 设置 p 元素为可见
+    paragraph.style.display = 'block';
+  </script> 
+ 
+
+  <script>
+   alert ( 'Currrent date:' + Date());
+  </script>
+
+  <div class="hello">
+    <script>
+      var name;
+      name = window.prompt ('Please enter your name.');
+      document.writeln( "<h1>Hello " + name + ", weclome to my homepage!</h1>")
+    </script>
+  </div>
+
+  <script>
+    var paragraph = document.querySelector('#before-script');
+    if (paragraph !== null) {
+      paragraph.remove();
+    }
+  </script>
+
+<p></p>
+
+
+  <!-- 區塊1 : 更改背景顏色-->
+  <div id="block1" class="block">
+    <img src="kitty-cat.jpeg" alt="Image 1">
+    <div class="text">
+    <h1>更改背景顏色</h1>
+    <p></p>
+    <div class="button-container">
+      <button class="button1" onClick="document.body.style.backgroundColor = '#fff0f5'">pink mode</button>
+      <button class="button2" onClick="document.body.style.backgroundColor = '#cff0ec'">green mode</button>
+      <button class="button3" onClick="alert('reset background color') ; document.body.style.backgroundColor = 'white';">reset background color</button>
+    </div>
+    </div>
+  </div>
+  <div class="separator"></div>
+
+
+
+  <!-- 區塊2 :爛笑話 -->
+  <div id="block2" class="block">
+    <img src="blackcat.jpg" alt="Image 2">
+    <div class="text">
+    <h1>爛笑話</h1>
+    <div class="button-container">
+      <button class="button" onClick="alert('葡萄柚')">葡萄點名</button>
+      <button class="button" onClick="alert('兩件80')">我跟你們說一件事實</button>
+    </div>
+<p> </p>
+  </div>
+</div>
+   <div class="separator"></div>
+
+<!-- 區塊3:倒著說話生成器 -->
+<div id="block3" class="block">
+  <img src="cute.jpg" alt="Image 3" >
+  <div class="text">
+    <h1>倒著說話生成器</h1>
+    <div class="button-container">
+      <button class="button" onclick="reverseNumber()">倒反數字</button>
+      <button class="button" onclick="reverseText()">倒反中文句子</button>
+    </div>
+    <div class="result-container">
+      <div class="result" id="result"></div>
+    </div>
+    <script>
+      function reverseNumber() {
+        var userInput = window.prompt('Please enter a number.');
+
+        if (userInput !== null) {
+          var parsedNumber = parseInt(userInput.toString().split('').reverse().join(''));
+          if (!isNaN(parsedNumber)) {
+            document.getElementById('result').innerText = 'Parsed number: ' + parsedNumber;
+          } else {
+            alert('Invalid input. Please enter a valid number.');
+          }
+        }
+      }
+
+      function reverseText() {
+        var userInput = window.prompt('請輸入句子');
+
+        if (userInput !== null) {
+          var reversedWords = userInput.split(' ').map(function (word) {
+            return word.split('').reverse().join('');
+          });
+
+          var reversedSentence = reversedWords.reverse().join(' ');
+          document.getElementById('result').innerText = reversedSentence;
+        }
+      }
+    </script>
+  </div>
+</div>
+<div class="separator"></div>
+
+ <!-- 區塊4:bmi -->
+  <div id="block4" class="block">
+  <img src="fat.jpg" alt="Image 4">
+  <div class="text">
+    <h1>BMI計算器</h1>
+    <div class="result-container">
+      <div class="result1" id="result1"></div>
+    </div>
+    <div class="button-container">
+      <button class="button" onclick="getHeight()">身高</button>
+      <button class="button" onclick="getWeight()">體重</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  var height = 0;
+  var weight = 0;
+
+  function getHeight() {
+    var heightInput = window.prompt('請輸入身高（單位：米）');
+    if (heightInput !== null) {
+      height = parseFloat(heightInput);
+      document.getElementById('result1').innerText = '輸入的身高為：' + height + ' 米';
+    }
+  }
+
+  function getWeight() {
+    var weightInput = window.prompt('請輸入體重（單位：公斤）');
+    if (weightInput !== null) {
+      weight = parseFloat(weightInput);
+      document.getElementById('result1').innerText += ', 輸入的體重為：' + weight + ' 公斤';
+      displayResult();
+    }
+  }
+
+  function calculateBMI() {
+    return weight / (height * height);
+  }
+
+  function displayResult() {
+    var bmi = calculateBMI();
+    var resultElement = document.getElementById('result1');
+
+    if (!isNaN(bmi)) {
+      resultElement.innerText += ', BMI 為：' + bmi.toFixed(2);
+
+      if (bmi < 18.5) {
+        resultElement.innerText += ', 體重過輕';
+      } else if (bmi >= 18.5 && bmi < 24) {
+        resultElement.innerText += ', 正常範圍';
+      } else {
+        resultElement.innerText += ', 過重';
+      }
+    } else {
+      resultElement.innerText = '請輸入有效的身高和體重';
+    }
+  }
+</script>
+
+
+    </div>
+   <div class="separator"></div>
+  <!-- ... 可以继续添加更多的区块 -->
+  
+  <script>
+    // JavaScript 代码
+    // 添加滚动事件监听器
+    window.addEventListener('wheel', function(e) {
+      // 阻止默认的滚动行为
+      e.preventDefault();
+
+      // 获取所有的区块
+      const blocks = document.querySelectorAll('.block');
+      
+      // 当滚动向上时
+      if (e.deltaY < 0) {
+        blocks.forEach((block, index) => {
+          if (block.getBoundingClientRect().top < 0) {
+            // 滚动到上一个区块的顶部
+            window.scrollTo({
+              top: blocks[index - 1].offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      } else {
+        blocks.forEach((block, index) => {
+          if (block.getBoundingClientRect().top < window.innerHeight * 0.5) {
+            // 滚动到下一个区块的顶部
+            window.scrollTo({
+              top: blocks[index + 1].offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
